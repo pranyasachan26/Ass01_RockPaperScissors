@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class RockPaperScissors {
+public class RockPaperScissors {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -12,16 +12,10 @@ class RockPaperScissors {
             String playerA, playerB;
 
             // Get valid move for Player A
-            do {
-                System.out.print("Player A, enter your move (R, P, or S): ");
-                playerA = input.nextLine().trim();
-            } while (!isValidMove(playerA));
+            playerA = getValidMove(input, "Player A");
 
             // Get valid move for Player B
-            do {
-                System.out.print("Player B, enter your move (R, P, or S): ");
-                playerB = input.nextLine().trim();
-            } while (!isValidMove(playerB));
+            playerB = getValidMove(input, "Player B");
 
             // Display result
             displayWinner(playerA, playerB);
@@ -34,6 +28,21 @@ class RockPaperScissors {
 
         System.out.println("Thanks for playing!");
         input.close();
+    }
+
+    // Method to get valid move with error message
+    public static String getValidMove(Scanner input, String playerName) {
+        String move;
+        while (true) {
+            System.out.print(playerName + ", enter your move (R, P, or S): ");
+            move = input.nextLine().trim();
+
+            if (isValidMove(move)) {
+                return move; // valid, exit loop
+            } else {
+                System.out.println("Invalid move! Please enter R, P, or S.");
+            }
+        }
     }
 
     // Check if move is valid
